@@ -7,7 +7,6 @@ function ListaCompra(){
         e.preventDefault();
         const myForm = e.target;
         const myInput = myForm.querySelector("input");
-        console.log(myInput);
         setListaProductos([...listaProductos, myInput.value]);
     }
 
@@ -18,12 +17,15 @@ function ListaCompra(){
             <button>Añadir producto</button>
         </form>
             <p>Productos: </p>
-            <ul>{listaProductos.map(function (value, index){ //con el map, peudes btener en index y añadirlo como key para evitar que salga errores
-
+            <ul>
+                {listaProductos.map(function (value, index){ //con el map, peudes btener en index y añadirlo como key para evitar que salga errores
                 return <li key={index}>{value}</li>
-            }
-                
-            )}</ul>
+                //Para devovler más de una cosa, se añade la key al fragment "<>" o se crea un padre y se mete en el: <div key>
+            
+                // {listaProductos.map((value, index) => { //otra estructura
+                //     return <li key={index}>{value}</li>
+                })}
+            </ul>
         </>
     );
 }
