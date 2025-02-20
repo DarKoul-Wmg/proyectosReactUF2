@@ -2,6 +2,8 @@
 import TabButton from "./TabButton.jsx";
 import {EXAMPLES} from "../data.js";
 import { useState } from "react";
+import Section from "./Section.jsx";
+import Tabs from "./Tabs.jsx";
 
 
 export default function Examples (){
@@ -25,10 +27,20 @@ export default function Examples (){
         </div>
       );
     }
+
+    const misBotones = Object.keys(EXAMPLES).map((example, index) => (
+                      <TabButton
+                          key={index}
+                          onClick={() => handleClick(example)} 
+                          isActive={selectedTab ===  example} >
+                          
+                          {example}
+                      </TabButton>
+                    ))
+
     return(
-        <section id="examples">
-        <h2>Examples</h2>
-            <menu>
+        <Section id="examples" titulo ="Examples">
+            <Tabs botones={misBotones} Contendor="menu">{content} </Tabs>
                 {/* <TabButton onClick={() => handleClick("components")} isActive={selectedTab === 'componets'} >Component</TabButton>
                 <TabButton onClick={() => handleClick("jsx")} isActive={selectedTab === 'jsx'}>JSX</TabButton>
                 <TabButton onClick={() => handleClick("props")} isActive={selectedTab === 'props'}>Props</TabButton>
@@ -36,18 +48,8 @@ export default function Examples (){
 
                 {/* keys transforma el objeto para poder iterarlo a traves de sus propiedades, trasnformandolo en un array asociativo
                 cada vez que se recorre el map, se itera sobre cada "key", en este caso: components, jsx, props,state*/}
-                {Object.keys(EXAMPLES).map((example, index) => (
-                  <TabButton
-                    key={index}
-                    onClick={() => handleClick(example)} 
-                    isActive={selectedTab ===  example} >
-                    
-                    {example}
-                  </TabButton>
-                ))}
+                
 
-            </menu>
-            {content}
             {/* forma dos renderizacion condicional, ternario */}
             {/* {!selectedTab ? (<p>Click a button</p> :
             (selectedTab && (
@@ -71,6 +73,6 @@ export default function Examples (){
               </pre>
             </div>
             )} */}
-        </section>
+        </Section>
     );
 }

@@ -1,12 +1,11 @@
 import CoreConcept from "./CoreConcept";
 import {CORE_CONCEPTS} from "../data";
+import Section from "./Section";
 
 
 export default function CoreConcepts(){
     return (
-    <section id="core-concepts">
-          <h2>Time to get started!</h2>
-
+    <Section id="core-concepts" titulo="Time to get started!">
           <ul>
             {/* <CoreConcept 
               image={CORE_CONCEPTS[0].image}
@@ -24,10 +23,11 @@ export default function CoreConcepts(){
             <CoreConcept {...CORE_CONCEPTS[1]}/>
             <CoreConcept {...CORE_CONCEPTS[2]}/>
             <CoreConcept {...CORE_CONCEPTS[3]}/> */}
-            {CORE_CONCEPTS.map((concept,index) => (<CoreConcept key={index} {...concept}/>
-            ))}
-
+            {CORE_CONCEPTS.map((concept,index) => (
+              <CoreConcept key={index} {...concept}/>
+              )
+            )}
           </ul>
-        </section>
-    )
+          </Section>
+    );
 }
