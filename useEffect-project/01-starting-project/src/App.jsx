@@ -11,7 +11,11 @@ import { sortPlacesByDistance } from './loc.js'
 function App() {
 	const modal = useRef();
 	const selectedPlace = useRef();
-	const [pickedPlaces, setPickedPlaces] = useState([]);
+
+  // let lastPickedPlaces  = JSON.parse(localStorage.getItem('selectedValueIds')) || [];
+  // console.log("palces ->"+lastPickedPlaces);
+	// const [pickedPlaces, setPickedPlaces] = useState([Object.values(lastPickedPlaces)]);
+  const [pickedPlaces, setPickedPlaces] = useState([]);
 	const [sortedAvaliablePlaces, setSortedAvaliablePlaces] = useState([]);
   
 	// Ordenar card en base a la localizacion del usuario, funciones importadas de loc.js
