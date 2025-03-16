@@ -24,6 +24,7 @@ function App() {
 	const [sortedAvaliablePlaces, setSortedAvaliablePlaces] = useState([]);
 
   //crear variable de estado: const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenModal,setIsOpenModal] = useState(false);
   
 	// Ordenar card en base a la localizacion del usuario, funciones importadas de loc.js
 	// console.log(AVAILABLE_PLACES);
@@ -42,12 +43,14 @@ function App() {
 //   console.log(sortedPlaces);
 
   function handleStartRemovePlace(id) {
-    modal.current.open(); // aqui vs un set de isopen a true para que se mueste
+    // modal.current.open(); // aqui vs un set de isopen a true para que se mueste
+    setIsOpenModal(!isOpenModal);
     selectedPlace.current = id;
   }
 
   function handleStopRemovePlace() {
-    modal.current.close();
+    // modal.current.close();
+    setIsOpenModal(!isOpenModal);
   }
 
   function handleSelectPlace(id) {
@@ -71,7 +74,8 @@ function App() {
     setPickedPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
     );
-    modal.current.close();
+    // modal.current.close();
+    setIsOpenModal(!isOpenModal);
 
 	const selectedIds = JSON.parse(localStorage.getItem('selectedValueIds')) || [];
 	localStorage.setItem(
@@ -83,7 +87,7 @@ function App() {
   return (
     <>
       {/* <Modal ref={modal}> */}
-      <Modal isOpen={}>
+      <Modal isOpen={isOpenModal}>
         <DeleteConfirmation
           onCancel={handleStopRemovePlace}
           onConfirm={handleRemovePlace}

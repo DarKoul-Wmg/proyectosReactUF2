@@ -1,16 +1,18 @@
-import { forwardRef, useImperativeHandle, useReducer, useRef } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useReducer, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 function Modal({ children , isOpen }) {
   const myComponente = useRef();
-  
-  
+
+  //? porque hay que comporbar que este definido antes de llamar a los metodos 
   if (isOpen){
-    myComponente.current.showModal();
+    myComponente.current?.showModal();
     
   } else{
-    myComponente.current.close();
+    myComponente.current?.close();
   }
+
+ 
   // const dialog = useRef();
 
   // useImperativeHandle(ref, () => {
