@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Places from './components/Places.jsx';
 import { AVAILABLE_PLACES } from './data.js';
 import Modal from './components/Modal.jsx';
@@ -44,13 +43,13 @@ function App() {
 
   function handleStartRemovePlace(id) {
     // modal.current.open(); // aqui vs un set de isopen a true para que se mueste
-    setIsOpenModal(!isOpenModal);
+    setIsOpenModal(true);
     selectedPlace.current = id;
   }
 
   function handleStopRemovePlace() {
     // modal.current.close();
-    setIsOpenModal(!isOpenModal);
+    setIsOpenModal(false);
   }
 
   function handleSelectPlace(id) {
@@ -70,19 +69,21 @@ function App() {
 	console.log(selectedIds);
   }
 
-  function handleRemovePlace() {
+
+  const handleRemovePlace = useCallback(function handleRemovePlace() { //usecallback solo se usa si se genera un bucle infinito
     setPickedPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
     );
     // modal.current.close();
-    setIsOpenModal(!isOpenModal);
+    setIsOpenModal(false);
 
 	const selectedIds = JSON.parse(localStorage.getItem('selectedValueIds')) || [];
+
 	localStorage.setItem(
 		"selectedValueIds", 
 		JSON.stringify(selectedIds.filter((idValue)=> idValue !== selectedPlace.current))
 	);
-  }
+  }, []);
 
   return (
     <>

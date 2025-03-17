@@ -4,17 +4,18 @@ import { createPortal } from 'react-dom';
 function Modal({ children , isOpen }) {
   const myComponente = useRef();
 
-  //? porque hay que comporbar que este definido antes de llamar a los metodos 
-  if (isOpen){
-    myComponente.current?.showModal();
-    
-  } else{
-    myComponente.current?.close();
-  }
+  // use efect porque necesito que exista el moda
+  useEffect(() =>{
+    if (isOpen){
+      myComponente.current.showModal();
+      
+    } else{
+      myComponente.current.close();
+    }
+  },[isOpen]); //ejecuta el codigo cada vez que la variale de estado cambie
 
- 
+
   // const dialog = useRef();
-
   // useImperativeHandle(ref, () => {
   //   return {
   //     open: () => {
@@ -29,7 +30,7 @@ function Modal({ children , isOpen }) {
   return createPortal(
     // <dialog className="modal" ref={dialog}>
     <dialog className="modal" ref={myComponente}>
-      {children}
+      {isOpen && children}
     </dialog>,
     document.getElementById('modal')
   );

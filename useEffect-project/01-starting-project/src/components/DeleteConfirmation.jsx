@@ -1,4 +1,34 @@
+import { useEffect, useState } from "react";
+
+const TIMER = 3000; // ya que se usa para el settimeout Y LA PROGRESS BAR, LA DEFINIMOS CONSTATE
 export default function DeleteConfirmation({ onConfirm, onCancel }) {
+
+  const [remainingTime, setRemainingTime] = useState(TIMER);
+
+  useEffect(() =>{
+    const idSetInterval = setInterval(() => {
+      console.log('SETINTERVAL')
+      setRemainingTime((prevRemainingTime) => prevRemainingTime - 10);
+    }, 10);
+
+    return () =>{
+      clearInterval(idSetInterval);
+    }
+  },[])
+
+  useEffect(() => {
+    const idTimeOut = setTimeout(() => {
+      console.log("TIMEOUT");
+      onConfirm();
+    }, TIMER);
+    
+    //parar el useEffect con un return
+    return () => {
+      clearTimeout(idTimeOut);
+    }
+
+  },[onConfirm])
+
   return (
     <div id="delete-confirmation">
       <h2>Are you sure?</h2>
@@ -11,6 +41,7 @@ export default function DeleteConfirmation({ onConfirm, onCancel }) {
           Yes
         </button>
       </div>
+      <progress value={remainingTime} max={TIMER}/>
     </div>
   );
 }
