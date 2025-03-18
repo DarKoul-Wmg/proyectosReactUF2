@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ProgressBar from "./ProgressBar";
 
 const TIMER = 3000; // ya que se usa para el settimeout Y LA PROGRESS BAR, LA DEFINIMOS CONSTATE
 export default function DeleteConfirmation({ onConfirm, onCancel }) {
@@ -41,7 +42,8 @@ export default function DeleteConfirmation({ onConfirm, onCancel }) {
           Yes
         </button>
       </div>
-      <progress value={remainingTime} max={TIMER}/>
+      <ProgressBar remainingTime = {remainingTime} maxTime = {TIMER} />
+      {/* <progress value={remainingTime} max={TIMER}/> */}
     </div>
   );
 }
