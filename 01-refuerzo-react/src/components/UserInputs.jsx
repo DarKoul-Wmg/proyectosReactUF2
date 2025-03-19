@@ -1,28 +1,24 @@
-export default function UserInputs(){
+import UserInput from "./UserInput";
+
+export default function UserInputs({data, onInputsChange}){
     return(
         <>
-        <section id="user-input">
-            <div className="input-group">
-                <p>
-                    <label htmlFor="">Primer</label>
-                    <input type="text"></input>
-                </p>
-                <p>
-                    <label htmlFor="">Primer</label>
-                    <input type="text"></input>
-                </p>
-            </div>
-            <div className="input-group">
-                <p>
-                    <label htmlFor="">Segundo</label>
-                    <input type="text"></input>
-                </p>
-                <p>
-                    <label htmlFor="">Segundo</label>
-                    <input type="text"></input>
-                </p>
-            </div>
-        </section>
+            <section id="user-input">
+                <div className="input-group">
+                    <UserInput textLabel="initial investment" 
+                        data={data.initialInvestment} 
+                        onInputsChange ={ onInputsChange} 
+                        dataId="initialInvestment"
+                    />
+
+                    <UserInput textLabel="annual investment" data={data.annualInvestment} onInputsChange ={ onInputsChange} dataId="annualInvestment"/>
+                </div>
+
+                <div className="input-group">
+                    <UserInput textLabel="expected return" data={data.expectedReturn} onInputsChange ={ onInputsChange} dataId="expectedReturn"/>
+                    <UserInput textLabel="duration" data={data.duration} onInputsChange ={ onInputsChange} dataId="duration"/>
+                </div>
+            </section>
         </>
     )
 }
