@@ -1,3 +1,6 @@
+import GameBoard from "./components/GameBoard";
+import Player from "./components/Player";
+
 /**
  * 1. We can add html static info outside from React Components, ie. header directly on index.html
  * <header>
@@ -103,7 +106,21 @@
     create new function outside App function and pass as a parameter gameturns
  * **/
 function App() {
-  return <h1>React Tic-Tac-Toe</h1>;
+// return <h1>React Tic-Tac-Toe</h1>;
+    return (
+        <>
+            <main>
+                <div id="game-container">
+                    <ol id="players">
+                        <Player name="Player 1" symbol= "O"/>
+                        <Player name="Player 2" symbol= "X"/>
+                    </ol>
+                    {/* GAMEBOARD */}
+                    <GameBoard />
+                </div>
+            </main>
+        </>
+    )
 }
 
 export default App;
