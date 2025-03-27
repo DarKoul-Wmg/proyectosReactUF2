@@ -1,10 +1,19 @@
-import { useState } from "react";
 
-export default function ProjectsContent(props){
-    const [isCreatingProject, setIsCreatingProject] = useState(props.isCreatingProject);
 
-    function activateCreateProject (){
-        setIsCreatingProject (true);
+export default function ProjectsContent({isCreatingProject, onCreateProject, handleAddProject}){
+
+    function handleSubmit(e){
+        e.preventDefault();
+        
+        const fd = new FormData(e.target);
+        //console.log(fd);
+        const newProject = Object.fromEntries(fd.entries());
+        //console.log(newProject);
+
+        handleAddProject(newProject);
+
+        e.target.reset();
+
     }
 
     if(!isCreatingProject){
@@ -20,7 +29,7 @@ export default function ProjectsContent(props){
               </p>
               <p className="mt-8">
                 <button className="px-4 py-2 text-xs md:text-base rounded-md bg-stone-700 text-stone-400 hover:bg-stone-600 hover:text-stone-100"
-                    onClick={ activateCreateProject }>
+                >
                   Create a new project
                 </button>
               </p>
@@ -29,9 +38,10 @@ export default function ProjectsContent(props){
     }
 
     return (
-        <form className="w-[35rem] mt-8">
+        <form className="w-[35rem] mt-8" onSubmit={handleSubmit}>
             <menu className="flex items-center justify-end gap-4 my-4">
-                <button className="bg-stone-800 text-stone-50 hover:bg-stone-950 px-6 py-2 rounded-md">
+                <button className="bg-stone-800 text-stone-50 hover:bg-stone-950 px-6 py-2 rounded-md"
+                    name="save" type="submit">
                     Save
                 </button>
             </menu>
